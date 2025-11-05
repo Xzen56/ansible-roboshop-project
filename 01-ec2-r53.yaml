@@ -25,3 +25,10 @@
     ansible.builtin.debug:
       msg: "{{ec2_output}}"
 
+  - name: print the private IP addess
+    ansible.builtin.debug: "{{item.instances[0].private_ip_address}}"
+    loop: "{{ec2_output.results}}"
+
+  - name: print the public IP addess
+    ansible.builtin.debug: "{{item.instances[0].public_ip_address}}"
+    loop: "{{ec2_output.results}}"
