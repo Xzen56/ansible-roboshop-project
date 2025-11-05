@@ -20,17 +20,36 @@
     loop: "{{instances}}"
     register: ec2_output
 
-
-  # - name: print the ec2_output
+     # - name: print the ec2_output
   #   ansible.builtin.debug:
   #     msg: "{{ec2_output}}"
 
-  - name: print the private IP addess
-    ansible.builtin.debug: 
-      msg: "{{item.instances[0].private_ip_address}}"
+  # - name: print the private IP addess
+  #   ansible.builtin.debug: 
+  #     msg: "{{item.instances[0].private_ip_address}}"
+  #   loop: "{{ec2_output.results}}"
+
+  # - name: print the public IP addess
+  #   ansible.builtin.debug: 
+  #     msg: "{{item.instances[0].public_ip_address}}"
+  #   loop: "{{ec2_output.results}}"
+
+
+  - name: create the r35 module
+    amazon.aws.route53:
+      state: present
+      zone: "{{domian_name}}"
+      record: "{{item.item}}.{{domian_name}}" #mongodb.thiscomeback.fun
+      type: A
+      ttl: 1
+      value: "{{item.instances[0].private_ip_address}}"
+      overwrite: true
     loop: "{{ec2_output.results}}"
 
-  - name: print the public IP addess
-    ansible.builtin.debug: 
-      msg: "{{item.instances[0].public_ip_address}}"
-    loop: "{{ec2_output.results}}"
+
+
+
+
+
+
+ 
