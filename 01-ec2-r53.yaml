@@ -3,7 +3,7 @@
   connection: local
   vars:
     ami_id: ami-09c813fb71547fc4f
-    sg_id: sg-08570272f74f280e0
+    sg_id: sg-021267ece598a730b
     zone_id: "Z0703152351ZHIBULK5Q0"
     domian_name: "thiscomeback.fun"
     instances:
@@ -33,9 +33,9 @@
   #   loop: "{{ec2_output.results}}"
 
 
-         # - name: print the ec2_output
-  #   ansible.builtin.debug:
-  #     msg: "{{ec2_output}}"
+  - name: print the ec2_output
+    ansible.builtin.debug:
+      msg: "{{ec2_output}}"
 
   # - name: print the private IP addess
   #   ansible.builtin.debug: 
