@@ -10,7 +10,7 @@
     - name: install the mongo db server
       ansible.builtin.package:
         name: mongodb-org
-        state: present
+      state: present
 
     - name: replace the remote connection
       ansible.builtin.replace:
